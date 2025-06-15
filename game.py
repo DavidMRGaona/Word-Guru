@@ -37,8 +37,15 @@ class WordGuruGame:
             scores_path: Path to scores JSON file, None to disable persistence
             player: Player name for score tracking
             daily_mode: If True, use daily word selection
+
+        Raises:
+            ValueError: If word list contains invalid words
         """
         self.word_list = [word.upper().strip() for word in word_list]
+
+        # Validate word list before proceeding
+        self._validate_word_list()
+
         self.max_attempts = max_attempts
         self.scores_path = scores_path
         self.player = player
@@ -47,6 +54,41 @@ class WordGuruGame:
         self.attempts: List[str] = []
         self.game_over: bool = False
         self.won: bool = False
+
+    def _validate_word_list(self) -> None:
+        """
+        Validate that all words in the word list are exactly 5 letters and contain only letters.
+
+        Raises:
+            ValueError: If any word is invalid with detailed error message
+        """
+        if not self.word_list:
+            raise ValueError("Word list cannot be empty")
+
+        invalid_words = []
+
+        for word in self.word_list:
+            issues = []
+
+            # Check length
+            if len(word) != 5:
+                issues.append(f"length {len(word)} (expected 5)")
+
+            # Check if alphabetic
+            if not word.isalpha():
+                issues.append("contains non-alphabetic characters")
+
+            if issues:
+                invalid_words.append(f"'{word}': {', '.join(issues)}")
+
+        if invalid_words:
+            error_msg = f"Invalid words found in word list:\n"
+            for issue in invalid_words[:10]:  # Show first 10 issues
+                error_msg += f"  - {issue}\n"
+            if len(invalid_words) > 10:
+                error_msg += f"  ... and {len(invalid_words) - 10} more issues\n"
+            error_msg += "\nAll words must be exactly 5 letters long and contain only letters."
+            raise ValueError(error_msg)
 
     def start_game(self) -> None:
         """

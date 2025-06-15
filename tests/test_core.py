@@ -54,12 +54,24 @@ class TestWordGuruGame(unittest.TestCase):
         self.assertFalse(game.won)
 
     def test_start_game_empty_word_list(self):
-        """Test that start_game raises error with empty word list."""
-        game = WordGuruGame([])
-
+        """Test that game initialization raises error with empty word list."""
         with self.assertRaises(ValueError) as context:
-            game.start_game()
-        self.assertIn("No words available for the game", str(context.exception))
+            game = WordGuruGame([])
+        self.assertIn("Word list cannot be empty", str(context.exception))
+
+    def test_invalid_word_validation(self):
+        """Test that game initialization validates word format."""
+        # Test words with wrong length
+        with self.assertRaises(ValueError) as context:
+            game = WordGuruGame(["CAT", "ELEPHANT"])
+        self.assertIn("Invalid words found", str(context.exception))
+        self.assertIn("CAT", str(context.exception))
+        self.assertIn("length 3", str(context.exception))
+
+        # Test words with non-alphabetic characters
+        with self.assertRaises(ValueError) as context:
+            game = WordGuruGame(["12345", "ABC-D"])
+        self.assertIn("non-alphabetic characters", str(context.exception))
 
     def test_check_guess_without_start(self):
         """Test that check_guess raises error when game not started."""
