@@ -1,0 +1,83 @@
+# Word-Guru Dictionary - Multi-Theme Example
+# This file demonstrates how to create custom word lists for any theme
+# All words must be exactly 5 letters long (Wordle format)
+# One word per line, uppercase
+
+# Animals Theme
+TIGER
+HORSE
+WHALE
+EAGLE
+SHARK
+
+# Countries/Geography Theme
+SPAIN
+ITALY
+JAPAN
+CHINA
+EGYPT
+
+# Technology Theme
+LINUX
+CLOUD
+MYSQL
+
+# Food Theme
+PIZZA
+BREAD
+APPLE
+GRAPE
+HONEY
+
+# Colors Theme
+BLACK
+WHITE
+GREEN
+BROWN
+CORAL
+
+# Sports Theme
+RUGBY
+CHESS
+TRACK
+SKATE
+SPORT
+
+# Science Theme
+ATOMS
+LASER
+ORBIT
+GENES
+VIRUS
+
+# Music Theme
+PIANO
+DRUMS
+FLUTE
+OPERA
+BLUES
+
+# Nature Theme
+OCEAN
+RIVER
+STORM
+FIELD
+BEACH
+
+# Space Theme
+EARTH
+VENUS
+COMET
+LUNAR
+SOLAR
+
+# Additional Words
+WORLD
+PEACE
+
+# To create your own themed word list:
+# 1. Copy this file to a new name (e.g., animals.txt)
+# 2. Replace words with your theme
+# 3. Ensure all words are exactly 5 letters
+# 4. Use uppercase format
+# 5. Run: python3 play.py --words your_theme.txt
